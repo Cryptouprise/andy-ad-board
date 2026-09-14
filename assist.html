@@ -3,130 +3,348 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Assist ads vs Chase UGC — for Andy</title>
+<title>The Assist live ads vs Chase remakes — for Andy</title>
 <style>
-  :root { --bg:#0b0d10; --panel:#14181f; --line:#2a3140; --text:#f2f4f7; --muted:#9aa3b2; --accent:#f5d547; --green:#3dd68c; --pink:#f0a0c0; }
+  :root {
+    --bg: #0b0d10;
+    --panel: #14181f;
+    --line: #2a3140;
+    --text: #f2f4f7;
+    --muted: #9aa3b2;
+    --accent: #f5d547;
+    --green: #3dd68c;
+    --pink: #f0a0c0;
+    --red: #ff7b72;
+  }
   * { box-sizing: border-box; }
-  body { margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: radial-gradient(1200px 600px at 80% -10%, #2a1524 0%, var(--bg) 55%); color: var(--text); line-height:1.45; }
-  .wrap { max-width:1180px; margin:0 auto; padding:32px 20px 80px; }
-  .eyebrow { color:var(--pink); font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
-  h1 { font-size:clamp(28px,4vw,40px); margin:10px 0 8px; letter-spacing:-0.03em; }
-  .sub { color:var(--muted); max-width:760px; font-size:16px; }
-  .note { margin-top:16px; padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:#10151d; color:var(--muted); font-size:14px; }
-  .note strong { color:var(--text); }
-  .stats { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 8px; }
-  .stat { border:1px solid var(--line); background:#10151d; border-radius:10px; padding:10px 12px; font-size:13px; color:var(--muted); }
-  .stat b { color:var(--text); display:block; font-size:18px; }
-  .cols { display:grid; grid-template-columns:1fr 40px 1fr; gap:12px; color:var(--muted); font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; margin:18px 0 8px; }
-  .row { display:grid; grid-template-columns:1fr 40px 1fr; gap:12px; margin-bottom:18px; }
-  .card { background:var(--panel); border:1px solid var(--line); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
-  .label { display:flex; justify-content:space-between; gap:10px; padding:12px 14px; border-bottom:1px solid var(--line); font-size:13px; }
-  .pill { display:inline-block; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700; }
-  .pill.them { background:#3a2433; color:#f0c0d4; }
-  .pill.wait { background:#3a2f12; color:var(--accent); }
-  .media { aspect-ratio:9/16; max-height:480px; background:#0a0c10; display:flex; align-items:center; justify-content:center; }
-  .media img { width:100%; height:100%; object-fit:contain; background:#000; }
-  .meta { padding:12px 14px 16px; font-size:14px; color:var(--muted); }
-  .meta h3 { margin:0 0 6px; color:var(--text); font-size:15px; }
-  .vs { display:flex; align-items:center; justify-content:center; }
-  .vs span { width:36px; height:36px; border-radius:50%; border:1px solid var(--line); display:grid; place-items:center; background:#10151d; color:var(--muted); font-size:12px; font-weight:800; }
-  .placeholder { width:100%; height:100%; display:grid; place-items:center; text-align:center; padding:24px; background:repeating-linear-gradient(-45deg,#12161d,#12161d 12px,#161b24 12px,#161b24 24px); color:var(--muted); }
-  .placeholder strong { display:block; color:var(--accent); font-size:18px; margin-bottom:8px; }
-  .ideas { margin-top:28px; border:1px solid var(--line); border-radius:16px; background:var(--panel); padding:18px 20px; }
-  .ideas h2 { margin:0 0 10px; font-size:18px; }
-  .ideas ol { margin:0; padding-left:20px; color:var(--muted); }
-  .ideas li { margin-bottom:10px; }
-  .ideas li strong { color:var(--text); }
-  .nav { margin-top:20px; }
-  .nav a { color:var(--accent); }
-  footer { margin-top:36px; color:var(--muted); font-size:13px; }
-  @media (max-width:860px){ .cols,.row{grid-template-columns:1fr;} .vs{display:none;} }
+  body {
+    margin: 0;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    background: radial-gradient(1200px 600px at 80% -10%, #2a1524 0%, var(--bg) 55%);
+    color: var(--text);
+    line-height: 1.45;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 20px 80px; }
+  .eyebrow {
+    display: inline-flex; gap: 8px; align-items: center;
+    color: var(--pink); font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  }
+  h1 { font-size: clamp(28px, 4vw, 40px); margin: 10px 0 8px; letter-spacing: -0.03em; }
+  .sub { color: var(--muted); max-width: 780px; font-size: 16px; }
+  .note {
+    margin-top: 16px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px;
+    background: #10151d; color: var(--muted); font-size: 14px;
+  }
+  .note strong { color: var(--text); }
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 8px; }
+  .stat {
+    border: 1px solid var(--line); background: #10151d; border-radius: 10px;
+    padding: 10px 12px; font-size: 13px; color: var(--muted);
+  }
+  .stat b { color: var(--text); display: block; font-size: 18px; }
+  .trash {
+    margin: 20px 0 8px; padding: 14px 16px; border: 1px solid #3a2433; border-radius: 12px;
+    background: #16101a; font-size: 14px; color: var(--muted);
+  }
+  .trash h2 { margin: 0 0 8px; font-size: 15px; color: var(--pink); letter-spacing: .02em; text-transform: uppercase; }
+  .trash ul { margin: 0; padding-left: 18px; }
+  .trash li { margin-bottom: 4px; }
+  .trash li strong { color: var(--text); }
+  .cols {
+    display: grid; grid-template-columns: 1fr 40px 1fr; gap: 12px; align-items: center;
+    margin: 22px 0 8px; color: var(--muted); font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .05em;
+  }
+  .row {
+    display: grid; grid-template-columns: 1fr 40px 1fr; gap: 12px; align-items: stretch;
+    margin-bottom: 18px;
+  }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+    display: flex; flex-direction: column; min-height: 100%;
+  }
+  .card.ours { border-color: #2a4a38; }
+  .label {
+    display: flex; justify-content: space-between; gap: 10px; align-items: center;
+    padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 13px;
+  }
+  .pill {
+    display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 700;
+  }
+  .pill.them { background: #3a2433; color: #f0c0d4; }
+  .pill.ours { background: #1d3b2c; color: var(--green); }
+  .media {
+    aspect-ratio: 9/16; max-height: 480px; background: #0a0c10;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .media img { width: 100%; height: 100%; object-fit: contain; background: #000; }
+  .script-block {
+    flex: 1; padding: 14px 16px 16px; font-size: 13px; color: var(--muted);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .script-block h3 { margin: 0; color: var(--text); font-size: 16px; letter-spacing: -0.02em; }
+  .angle { color: var(--accent); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  .hook {
+    background: #0a0c10; border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px 12px; color: var(--text); font-weight: 700; font-size: 15px;
+  }
+  .hook span { display: block; color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+  .vo, .primary, .why {
+    border-top: 1px solid var(--line); padding-top: 10px;
+  }
+  .vo strong, .primary strong, .why strong, .cta strong {
+    display: block; color: var(--green); font-size: 11px; text-transform: uppercase;
+    letter-spacing: .05em; margin-bottom: 4px;
+  }
+  .why strong { color: var(--accent); }
+  .cta {
+    margin-top: auto; padding: 10px 12px; border-radius: 10px;
+    background: #1d3b2c; color: var(--green); font-weight: 700; font-size: 13px;
+  }
+  .meta { padding: 12px 14px 16px; font-size: 14px; color: var(--muted); }
+  .meta h3 { margin: 0 0 6px; color: var(--text); font-size: 15px; }
+  .meta .fail { color: var(--red); font-size: 12px; font-weight: 600; margin-top: 8px; }
+  .vs { display: flex; align-items: center; justify-content: center; }
+  .vs span {
+    width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line);
+    display: grid; place-items: center; background: #10151d; color: var(--muted);
+    font-size: 12px; font-weight: 800;
+  }
+  .actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    appearance: none; border: 1px solid var(--line); background: #1a2230; color: var(--text);
+    border-radius: 10px; padding: 10px 14px; font-weight: 600; font-size: 14px; text-decoration: none;
+  }
+  .btn.primary { background: var(--accent); color: #111; border-color: var(--accent); }
+  .nav { margin-top: 20px; }
+  .nav a { color: var(--accent); }
+  footer { margin-top: 40px; color: var(--muted); font-size: 13px; }
+  @media (max-width: 860px) {
+    .cols, .row { grid-template-columns: 1fr; }
+    .vs { display: none; }
+    .media { max-height: 420px; }
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="eyebrow">For Andy · LeadRoller / The Assist</div>
-  <h1>Your live Meta ads vs 5 Chase cuts</h1>
-  <p class="sub">Left = what’s running now (~49 active US ads on Meta for theassist.com). Right = Chase UGC slots built to beat each lane. Same board style as the Trovy proof.</p>
-  <div class="note"><strong>$1,500 for 5 ads.</strong> Every Assist creative we pulled uses the same primary text and lands on <code>get.theassist.com/newsletter-v2/</code>. The unlock is sharper hooks + quiz monetization, not prettier “women at laptops.”</div>
-  <div class="stats">
-    <div class="stat"><b>~49</b> active Meta ads (US)</div>
-    <div class="stat"><b>1</b> primary text recycled</div>
-    <div class="stat"><b>newsletter-v2</b> destination on all 6 sampled</div>
-    <div class="stat"><b>Jul 23 → Sep 2</b> start dates sampled</div>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">For Andy · LeadRoller / The Assist</div>
+      <h1>Their live Meta creatives vs 5 Chase remakes</h1>
+      <p class="sub">
+        Left = what’s running now (same recycled primary text on every sample, soft formats, Sign Up CTA).
+        Right = full shoot-ready scripts built for mid-30s–50s managers/directors — tip in 3 seconds, Join Free → quiz.
+      </p>
+      <div class="note">
+        <strong>Offer locked:</strong> FREE newsletter 4x/week · 301k women · LP
+        <code>get.theassist.com/newsletter-v2/</code> · email Join Free · quiz monetization post-signup.
+        No invented view counts. No invented SGS pricing.
+      </div>
+      <div class="stats">
+        <div class="stat"><b>~49</b> active Meta ads (US)</div>
+        <div class="stat"><b>1</b> primary text recycled</div>
+        <div class="stat"><b>newsletter-v2</b> on all sampled</div>
+        <div class="stat"><b>Join Free → quiz</b> our CTA</div>
+      </div>
+      <div class="trash">
+        <h2>Their trash patterns</h2>
+        <ul>
+          <li><strong>Same line everywhere:</strong> “Learn how to become a better leader… sanity… respect…”</li>
+          <li><strong>Wrong avatar:</strong> early-20s / junior girlboss energy vs mid-30s–50s directors</li>
+          <li><strong>No tip in 3s:</strong> brand explainers, water B-roll, stock collage, porch mug</li>
+          <li><strong>CTA miss:</strong> Sign Up / Subscribe — Andy’s money is quiz → partner leads</li>
+          <li><strong>Proof leak:</strong> newsletter scroll leads with recipes/trivia before leadership value</li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="cols">
+      <div>The Assist in-market</div>
+      <div></div>
+      <div>Chase remake (full script)</div>
+    </div>
+
+    <!-- Row 1 -->
+    <div class="row">
+      <article class="card">
+        <div class="label"><span>Ad 01 · Talking + newsletter scroll</span><span class="pill them">Assist Meta</span></div>
+        <div class="media"><img src="assist/01-ugc-newsletter.png" alt="Assist UGC with newsletter scroll" /></div>
+        <div class="meta">
+          <h3>“better leader… keeping your sanity…”</h3>
+          0:21 video · Sign Up · young talent over scrolling issue (recipes, trivia, branding)
+          <div class="fail">Fail: junior face + generic promise + no tip</div>
+        </div>
+      </article>
+      <div class="vs"><span>VS</span></div>
+      <article class="card ours">
+        <div class="label"><span>Remake 1 · Dave stole my idea</span><span class="pill ours">Chase script</span></div>
+        <div class="script-block">
+          <div class="angle">Invisible labor / respect gap</div>
+          <h3>Named villain. Scene she lived.</h3>
+          <div class="hook"><span>On-screen hook (0–3s)</span>Dave repeated my idea. Again.</div>
+          <div class="vo">
+            <strong>VO (12–15s)</strong>
+            “Dave just repeated my idea in the meeting — and somehow it was brilliant when he said it. If you’re the woman everyone counts on and still invisible in the room… The Assist is the free 5-minute email 301k women open so that stops. Scripts, 1:1 openers, how to take credit without the apology essay. Join free. Then take the quiz — it’ll hand you the tools for your actual role.”
+          </div>
+          <div class="primary">
+            <strong>Primary text</strong>
+            Dave repeated my idea in the meeting. Again. If you’re doing the invisible labor and still watching someone else get the credit… The Assist is free, 4x/week, 301k women. Join free. Then take the 60-second quiz.
+          </div>
+          <div class="cta"><strong>CTA</strong>Join Free → take the quiz</div>
+          <div class="why"><strong>Why it beats theirs</strong>Scene &gt; abstract “become a better leader.” Thumb-stop first. Quiz CTA matches Andy’s monetization.</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="row">
+      <article class="card">
+        <div class="label"><span>Ad 02 · Coffee-mug UGC</span><span class="pill them">Assist Meta</span></div>
+        <div class="media"><img src="assist/02-mug-talking.png" alt="Assist mug talking head UGC" /></div>
+        <div class="meta">
+          <h3>Same primary text · Subscribe</h3>
+          Porch/sunroom talking head · headphones · mug · soft lifestyle UGC
+          <div class="fail">Fail: lifestyle vibe, zero usable tip, Subscribe ≠ quiz</div>
+        </div>
+      </article>
+      <div class="vs"><span>VS</span></div>
+      <article class="card ours">
+        <div class="label"><span>Remake 2 · Say-no script</span><span class="pill ours">Chase script</span></div>
+        <div class="script-block">
+          <div class="angle">Copy/paste utility · screenshot bait</div>
+          <h3>Hand her the Slack reply today.</h3>
+          <div class="hook"><span>On-screen hook (0–3s)</span>Steal this: how to say no by Friday</div>
+          <div class="vo">
+            <strong>VO (12–14s)</strong>
+            “Copy this: ‘I can take this on if we move X, or I can own Y by Friday — which matters more?’ No apology essay. No ‘happy to help!’ The Assist sends scripts like this four times a week so you keep your sanity and your team’s respect. Free. Join, then take the quiz — raise planner’s in there too.”
+          </div>
+          <div class="primary">
+            <strong>Primary text</strong>
+            Steal this say-no script: “I can take this on if we move X, or I can own Y by Friday — which matters more?” The Assist drops scripts like this 4x/week for managers/directors. Join free → take the quiz.
+          </div>
+          <div class="cta"><strong>CTA</strong>Join Free → take the quiz</div>
+          <div class="why"><strong>Why it beats theirs</strong>Usable in 3 seconds. Sound-off converts. Comment magnet. Mug lifestyle can’t compete.</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="row">
+      <article class="card">
+        <div class="label"><span>Ad 03 · Morning Brew / water</span><span class="pill them">Assist Meta</span></div>
+        <div class="media"><img src="assist/03-morning-brew.png" alt="Morning Brew but for Women Leaders ad" /></div>
+        <div class="meta">
+          <h3>“Morning Brew, but for Women Leaders”</h3>
+          Text-on-water · category claim · “Become a Better Professional in 5 Mins”
+          <div class="fail">Fail: stock water, no face, no tip, homework headline</div>
+        </div>
+      </article>
+      <div class="vs"><span>VS</span></div>
+      <article class="card ours">
+        <div class="label"><span>Remake 3 · 1:1 opener</span><span class="pill ours">Chase script</span></div>
+        <div class="script-block">
+          <div class="angle">Manager craft · director energy</div>
+          <h3>Promotion-grade habit, not pep talk.</h3>
+          <div class="hook"><span>On-screen hook (0–3s)</span>Stop asking “How’s it going?” in 1:1s</div>
+          <div class="vo">
+            <strong>VO (12–15s)</strong>
+            “Stop opening 1:1s with ‘How’s it going?’ Ask this instead: ‘What are you stuck on that I can unblock this week?’ Takes five seconds. Drama drops. Respect goes up. I get one tip like this every week in The Assist — free newsletter for women who actually run teams. Join free. Take the quiz so it doesn’t send you junior stuff.”
+          </div>
+          <div class="primary">
+            <strong>Primary text</strong>
+            Stop asking “How’s it going?” in your 1:1s. Ask: “What are you stuck on that I can unblock this week?” The Assist — free, 5 min, 301k women leaders. Join free → quiz (not junior fluff).
+          </div>
+          <div class="cta"><strong>CTA</strong>Join Free → take the quiz</div>
+          <div class="why"><strong>Why it beats theirs</strong>Speaks mid-30s–50s manager. Concrete opener &gt; water B-roll + “better professional.”</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Row 4 -->
+    <div class="row">
+      <article class="card">
+        <div class="label"><span>Ad 04 · Stock collage</span><span class="pill them">Assist Meta</span></div>
+        <div class="media"><img src="assist/04-stock-collage.png" alt="Assist stock laptop collage ad" /></div>
+        <div class="meta">
+          <h3>Sep 2 static · Sign Up</h3>
+          Laptop hands collage · “Become a Better Professional” · weakest creative of the set
+          <div class="fail">Fail: stock = death · Sign Up misses quiz money</div>
+        </div>
+      </article>
+      <div class="vs"><span>VS</span></div>
+      <article class="card ours">
+        <div class="label"><span>Remake 4 · AI without shame</span><span class="pill ours">Chase script</span></div>
+        <div class="script-block">
+          <div class="angle">AI FOMO · busy leaders</div>
+          <h3>Prompts, not a CS degree.</h3>
+          <div class="hook"><span>On-screen hook (0–3s)</span>You’re not behind on AI. You’re busy.</div>
+          <div class="vo">
+            <strong>VO (12–15s)</strong>
+            “You’re not behind on AI. You’re busy running a team. You don’t need another LinkedIn essay — you need prompts you can paste before your next 1:1. The Assist drops AI productivity hacks for women who lead. Free. Four times a week. Five minutes. Join free, take the quiz, get matched to the tools your role actually needs.”
+          </div>
+          <div class="primary">
+            <strong>Primary text</strong>
+            You’re not behind on AI. You’re busy. The Assist puts paste-ready AI prompts in your inbox for managers/directors. Free. 4x/week. 301k women. Join free → take the quiz.
+          </div>
+          <div class="cta"><strong>CTA</strong>Join Free → take the quiz</div>
+          <div class="why"><strong>Why it beats theirs</strong>Kills stock. Hits real AI demand without course energy. Quiz = partner path.</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Row 5 -->
+    <div class="row">
+      <article class="card">
+        <div class="label"><span>Their pattern · every sample</span><span class="pill them">Assist Meta</span></div>
+        <div class="media">
+          <div style="width:100%;height:100%;display:grid;place-items:center;padding:28px;text-align:center;background:repeating-linear-gradient(-45deg,#12161d,#12161d 12px,#161b24 12px,#161b24 24px);color:var(--muted);">
+            <div>
+              <strong style="display:block;color:var(--pink);font-size:18px;margin-bottom:10px;">Recycled primary text</strong>
+              “Learn how to become a better leader at work while keeping your sanity and earning the respect of your team.”
+              <div style="margin-top:14px;font-size:12px;">CTA: Sign Up / Subscribe · LP: newsletter-v2 · ~49 active, one message</div>
+            </div>
+          </div>
+        </div>
+        <div class="meta">
+          <h3>Fake creative diversity</h3>
+          Different skins. Same line. Meta punishes frequency; CTR dies with it.
+          <div class="fail">Fail: one message dressed 49 ways</div>
+        </div>
+      </article>
+      <div class="vs"><span>VS</span></div>
+      <article class="card ours">
+        <div class="label"><span>Remake 5 · Raise / get matched</span><span class="pill ours">Chase script</span></div>
+        <div class="script-block">
+          <div class="angle">Quiz-first monetizer · LP headline</div>
+          <h3>Pre-sell the quiz + raise planner.</h3>
+          <div class="hook"><span>On-screen hook (0–3s)</span>Don’t just subscribe. Get matched.</div>
+          <div class="vo">
+            <strong>VO (12–15s)</strong>
+            “Most newsletters dump you in and pray. The Assist makes you take a quick quiz so your results are for your role — manager, HR, ops, founder. That’s where the free raise planner lives and the tools these women actually use. You’re the woman everyone counts on at work. Five minutes, four times a week, free. Join free. Quiz after. Under two minutes.”
+          </div>
+          <div class="primary">
+            <strong>Primary text</strong>
+            You’re the woman everyone counts on at work. The Assist — free 5-min newsletter, 301k women, 4x/week. Join free, then take the 60-second quiz for your toolkit + free pay-raise planner.
+          </div>
+          <div class="cta"><strong>CTA</strong>Join Free → take the quiz</div>
+          <div class="why"><strong>Why it beats theirs</strong>Aligns ad intent with Andy’s day-zero quiz monetization. Unique primary text. LP message match.</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="actions">
+      <a class="btn primary" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=theassist.com&search_type=keyword_unordered" target="_blank" rel="noopener">Open Assist in Meta Ad Library</a>
+      <a class="btn" href="index.html">← Trovy proof board</a>
+      <a class="btn" href="https://get.theassist.com/newsletter-v2/" target="_blank" rel="noopener">Their LP (newsletter-v2)</a>
+    </div>
+
+    <p class="nav">
+      Scripts also in <code>ASSIST-REMAKES.md</code> · Shoot: 35–50 peer face · tip on captions · end on Join Free → quiz
+    </p>
+    <footer>
+      Built for Chase → Andy · Sep 14 2026 · Meta does not publish US commercial view counts.
+      Sampled distinct creatives from ~49 active US ads. Not affiliated with The Assist.
+    </footer>
   </div>
-
-  <div class="cols"><div>The Assist in-market</div><div></div><div>Chase UGC</div></div>
-
-  <div class="row">
-    <article class="card">
-      <div class="label"><span>Ad 01 · Talking + newsletter scroll</span><span class="pill them">Assist Meta</span></div>
-      <div class="media"><img src="assist/01-ugc-newsletter.png" alt="Assist UGC with newsletter scroll" /></div>
-      <div class="meta"><h3>“better leader… keeping your sanity…”</h3>0:21 video · Sign Up · woman + scrolling Assist issue (recipes, Canva, branding)</div>
-    </article>
-    <div class="vs"><span>VS</span></div>
-    <article class="card">
-      <div class="label"><span>Slot 01</span><span class="pill wait">Placeholder</span></div>
-      <div class="media"><div class="placeholder"><div><strong>Chase cut 01</strong>Same format, but first line is a specific tip (“stop saying ‘just circling back’”) then flip to the email. CTA: take the 30s quiz.</div></div></div>
-      <div class="meta"><h3>Beat: tip → product → quiz</h3>Not “learn how to become a better leader.” One concrete win in 3 seconds.</div>
-    </article>
-  </div>
-
-  <div class="row">
-    <article class="card">
-      <div class="label"><span>Ad 02 · Coffee-mug UGC</span><span class="pill them">Assist Meta</span></div>
-      <div class="media"><img src="assist/02-mug-talking.png" alt="Assist mug talking head UGC" /></div>
-      <div class="meta"><h3>Same primary text · Subscribe</h3>Porch/sunroom talking head · headphones · mug · soft lifestyle UGC</div>
-    </article>
-    <div class="vs"><span>VS</span></div>
-    <article class="card">
-      <div class="label"><span>Slot 02</span><span class="pill wait">Placeholder</span></div>
-      <div class="media"><div class="placeholder"><div><strong>Chase cut 02</strong>“I’m a director, not an EA — and I still open this every morning.” Title-specific avatar. End on 301k, not 30k.</div></div></div>
-      <div class="meta"><h3>Beat: senior title social proof</h3>Your audience skewed mid-30s–50s. Ads should sound like them.</div>
-    </article>
-  </div>
-
-  <div class="row">
-    <article class="card">
-      <div class="label"><span>Ad 03 · Morning Brew comparison</span><span class="pill them">Assist Meta</span></div>
-      <div class="media"><img src="assist/03-morning-brew.png" alt="Morning Brew but for Women Leaders ad" /></div>
-      <div class="meta"><h3>“Morning Brew, but for Women Leaders”</h3>0:10 text-on-water · “Tap below to join 30k+ women” · Become a Better Professional in 5 Mins</div>
-    </article>
-    <div class="vs"><span>VS</span></div>
-    <article class="card">
-      <div class="label"><span>Slot 03</span><span class="pill wait">Placeholder</span></div>
-      <div class="media"><div class="placeholder"><div><strong>Chase cut 03</strong>Keep the category claim — update to <em>301k+</em>. Face-to-cam: “Morning Brew for the women actually running the room.”</div></div></div>
-      <div class="meta"><h3>Beat: fix the stale number</h3>30k on a 301k brand is leaving money on the table.</div>
-    </article>
-  </div>
-
-  <div class="row">
-    <article class="card">
-      <div class="label"><span>Ad 04 · Stock collage</span><span class="pill them">Assist Meta</span></div>
-      <div class="media"><img src="assist/04-stock-collage.png" alt="Assist stock laptop collage ad" /></div>
-      <div class="meta"><h3>Sep 2 static · Sign Up</h3>Laptop hands collage · “Become a Better Professional” · weakest creative of the set</div>
-    </article>
-    <div class="vs"><span>VS</span></div>
-    <article class="card">
-      <div class="label"><span>Slot 04 + 05</span><span class="pill wait">Placeholder</span></div>
-      <div class="media"><div class="placeholder"><div><strong>Chase cuts 04–05</strong>Kill stock. Cut 04 = quiz-first. Cut 05 = one AI tip → Soft Soft Girl Society / SGS soft sell.</div></div></div>
-      <div class="meta"><h3>Beat: monetize path</h3>Your funnel pays in 7 days via quiz. Ads should push quiz, not generic Sign Up.</div>
-    </article>
-  </div>
-
-  <div class="ideas">
-    <h2>Five ads Chase will cut for $1,500</h2>
-    <ol>
-      <li><strong>Tip-first UGC</strong> — specific workplace line in 0–3s, then show the newsletter, CTA into the quiz.</li>
-      <li><strong>Director avatar</strong> — senior title face-to-cam (matches your mid-30s–50s readers).</li>
-      <li><strong>Morning Brew 301k</strong> — keep category claim, fix social proof, human face not water B-roll.</li>
-      <li><strong>Quiz monetizer</strong> — “30 seconds, I’ll tell you what’s killing your week” → get.theassist.com quiz.</li>
-      <li><strong>AI tip → SGS</strong> — one free hack, soft invite to Smart Girl Society for women who want the live room.</li>
-    </ol>
-  </div>
-
-  <p class="nav"><a href="index.html">← Trovy proof board</a> · <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=theassist.com&search_type=keyword_unordered" target="_blank" rel="noopener">Open Assist in Meta Ad Library</a></p>
-  <footer>Built for Chase → Andy · Sep 14 2026 · Meta does not publish commercial view counts. Sampled 6 distinct creatives from ~49 active US ads.</footer>
-</div>
 </body>
 </html>
