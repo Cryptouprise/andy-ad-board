@@ -542,9 +542,20 @@
       return typeof mime === "string" && /^video\//i.test(mime.trim());
     }
 
+    function isGoogleRenderedVideo(url) {
+      if (!isHttp(url)) return false;
+      const host = hostnameOf(url);
+      if (!host) return false;
+      if (host === "lh3.googleusercontent.com" || host.endsWith(".googleusercontent.com")) return true;
+      if (host === "notebooklm.google" || host.includes("notebooklm")) return true;
+      return false;
+    }
+
     function isDirectVideo(url, mime) {
       if (isVideoMime(mime)) return isHttp(url);
-      return typeof url === "string" && /\.(mp4|m4v|webm|ogg|ogv|mov)(\?|#|$)/i.test(url);
+      if (typeof url !== "string") return false;
+      if (/\.(mp4|m4v|webm|ogg|ogv|mov)(\?|#|$)/i.test(url)) return true;
+      return isGoogleRenderedVideo(url);
     }
 
     function isImageUrl(url) {
