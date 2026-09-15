@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Infinite AI Screening Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f3f3f1;
+    --surface: #ffffff;
+    --text: #111111;
+    --muted: #6b7280;
+    --slate: #4b5563;
+    --line: #e4e4e0;
+    --amber: #e3941c;
+    --amber-deep: #d07b0c;
+    --orange: #e06a12;
+    --orange-soft: #fff4e8;
+    --black: #111111;
+    --duration: #111111;
+    --shadow: 0 1px 2px rgba(17, 17, 17, 0.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  a { color: inherit; }
+  button { font: inherit; }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 28px;
+    background: rgba(243, 243, 241, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .brand-name {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .brand-note {
+    color: var(--muted);
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .brand-dot { color: var(--muted); }
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .ghost:hover { border-color: #cfcfc9; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 28px 28px 96px; }
+
+  .eyebrow {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  h1.hero {
+    font-family: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+    font-size: clamp(72px, 14vw, 148px);
+    line-height: 0.82;
+    letter-spacing: 0.01em;
+    margin: 18px 0 22px;
+    font-weight: 400;
+  }
+  .intro {
+    max-width: 760px;
+    color: var(--slate);
+    font-size: 18px;
+    margin: 0 0 22px;
+  }
+
+  .notice {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 100%;
+    padding: 10px 16px;
+    border: 1px solid #f0b36a;
+    border-radius: 999px;
+    background: #fffaf3;
+    color: var(--orange);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .notice-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--orange);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    margin: 28px 0 8px;
+  }
+  .stat { min-width: 120px; }
+  .stat span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .stat b {
+    display: block;
+    color: var(--amber-deep);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .stat b.mono {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .filters {
+    position: sticky;
+    top: 57px;
+    z-index: 30;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px 0 18px;
+    margin: 22px 0 8px;
+    background: var(--bg);
+  }
+  .filter {
+    appearance: none;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .filter:hover { border-color: #c8c8c2; }
+  .filter.active {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: #1a1204;
+  }
+  .filter.active[data-id="all"] {
+    background: var(--black);
+    border-color: var(--black);
+    color: #fff;
+  }
+  .filter .count { font-weight: 600; }
+
+  .section { margin: 42px 0 8px; }
+  .section.hidden { display: none; }
+  .section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+  .section h2 {
+    font-family: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 0.9;
+    letter-spacing: 0.01em;
+    margin: 0 0 8px;
+    font-weight: 400;
+  }
+  .section .blurb { color: var(--slate); font-size: 15px; margin: 0; }
+  .section .count-label {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .grid {
+    display: grid;
+    gap: 22px 16px;
+  }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
+  .grid.cols-1 { grid-template-columns: minmax(240px, 360px); }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+  }
+  .media {
+    position: relative;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #111;
+    box-shadow: var(--shadow);
+  }
+  .cols-3 .media { aspect-ratio: 16 / 10; }
+  .cols-5 .media { aspect-ratio: 16 / 10; }
+  .section[data-id="creator-ugc"] .media { aspect-ratio: 4 / 5; }
+  .section[data-id="landing-pages"] .media { aspect-ratio: 16 / 10; }
+  .media video, .media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #111;
+  }
+  .ph {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(120% 80% at 50% 120%, rgba(227, 148, 28, 0.16), transparent 46%),
+      linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+    color: #d6d6d6;
+  }
+  .ph-inner { text-align: center; padding: 16px; }
+  .ph-icon {
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 8px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.28);
+    display: grid;
+    place-items: center;
+  }
+  .ph-icon svg { width: 14px; height: 14px; fill: #fff; }
+  .ph-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.62);
+    font-weight: 600;
+  }
+  .badge {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background: var(--duration);
+    color: #fff;
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.01em;
+  }
+  .card-title {
+    margin: 12px 0 4px;
+    font-size: 16px;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+  .cols-5 .card-title { font-size: 14px; }
+  .card-cat {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 0 0 6px;
+  }
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: var(--muted);
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px;
+  }
+  .card-meta .playable { color: var(--amber-deep); }
+  .card-meta .missing { color: var(--orange); }
+
+  .foot {
+    margin-top: 64px;
+    color: var(--muted);
+    font-size: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    align-items: center;
+  }
+  .foot a { color: var(--amber-deep); font-weight: 600; text-decoration: none; }
+  .foot a:hover { text-decoration: underline; }
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(10, 10, 10, 0.78);
+  }
+  .modal.open { display: flex; }
+  .modal-panel {
+    width: min(960px, 100%);
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+  .modal-panel video { width: 100%; display: block; max-height: 80vh; background: #000; }
+  .modal-bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 14px;
+    background: #111;
+    color: #fff;
+  }
+  .modal-bar strong { font-size: 14px; }
+  .modal-close {
+    appearance: none;
+    border: 0;
+    background: #2a2a2a;
+    color: #fff;
+    border-radius: 999px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .load-error {
+    margin-top: 24px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #f0b36a;
+    background: #fffaf3;
+    color: var(--orange);
+  }
+
+  @media (max-width: 1100px) {
+    .grid.cols-5 { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 800px) {
+    .wrap { padding: 20px 16px 72px; }
+    .topbar { padding: 10px 16px; }
+    .brand-note { display: none; }
+    .stats { gap: 24px; }
+    .grid.cols-3, .grid.cols-5 { grid-template-columns: repeat(2, 1fr); }
+    h1.hero { font-size: 64px; }
+    .notice { border-radius: 16px; }
+  }
+  @media (max-width: 520px) {
+    .grid.cols-3, .grid.cols-5, .grid.cols-1 { grid-template-columns: 1fr; }
+    .top-actions .ghost:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-name">Infinite AI Screening Room</span>
+      <span class="brand-dot">·</span>
+      <span class="brand-note">Content is user-generated and unverified.</span>
+    </div>
+    <div class="top-actions">
+      <a class="ghost" href="assist.html">← Assist board</a>
+      <a class="ghost" href="https://claude.ai/artifact/4rNG7y53XcsyFmKq176CCB" target="_blank" rel="noopener">Open source artifact</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p class="eyebrow">Infinite AI · Video workroom</p>
+    <h1 class="hero">SCREENING ROOM</h1>
+    <p class="intro" id="intro"></p>
+    <div class="notice" id="notice" hidden>
+      <span class="notice-dot" aria-hidden="true"></span>
+      <span></span>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="filters" id="filters" role="tablist" aria-label="Format filters"></div>
+    <div id="sections"></div>
+    <div class="load-error" id="load-error" hidden></div>
+    <footer class="foot">
+      <a href="assist.html">← Back to The Assist board</a>
+      <span>Draft workroom for Andy / Chase</span>
+      <a href="https://claude.ai/artifact/4rNG7y53XcsyFmKq176CCB" target="_blank" rel="noopener">Original Screening Room source</a>
+    </footer>
+  </main>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+    <div class="modal-panel">
+      <div class="modal-bar">
+        <strong id="modal-title"></strong>
+        <button class="modal-close" type="button" id="modal-close" aria-label="Close">×</button>
+      </div>
+      <video id="modal-video" controls playsinline></video>
+    </div>
+  </div>
+
+  <script>
+    const SOURCE_ARTIFACT = "https://claude.ai/artifact/4rNG7y53XcsyFmKq176CCB";
+    const DATA_URL = "data/screening-room.json";
+
+    const ICONS = {
+      play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+      link: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg>',
+      source: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v2H4V6zm0 5h10v2H4v-2zm0 5h16v2H4v-2z"/></svg>'
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function isDirectVideo(url) {
+      return typeof url === "string" && /\.(mp4|webm|ogg|mov)(\?|#|$)/i.test(url);
+    }
+
+    function isExternalPage(url) {
+      return typeof url === "string" && /^https?:\/\//i.test(url) && !isDirectVideo(url);
+    }
+
+    function cardKind(item) {
+      if (isDirectVideo(item.url)) return "video";
+      if (isExternalPage(item.url)) return item.category === "Landing pages" ? "page" : "player";
+      return "missing";
+    }
+
+    function actionLabel(kind) {
+      if (kind === "video") return "Play";
+      if (kind === "player") return "Open player";
+      if (kind === "page") return "Open page";
+      return "Open in Screening Room source";
+    }
+
+    function gridClass(sectionId) {
+      if (sectionId === "start-here") return "cols-3";
+      if (sectionId === "landing-pages") return "cols-1";
+      return "cols-5";
+    }
+
+    function mediaMarkup(item, kind) {
+      const badge = item.duration
+        ? `<span class="badge">${escapeHtml(item.duration)}</span>`
+        : "";
+      if (isDirectVideo(item.url)) {
+        return `<div class="media"><video muted preload="metadata" playsinline src="${escapeHtml(item.url)}"></video>${badge}</div>`;
+      }
+      const icon = kind === "missing" ? ICONS.source : kind === "page" ? ICONS.link : ICONS.play;
+      const label = kind === "missing" ? "No file yet" : kind === "page" ? "Landing page" : "External clip";
+      return `<div class="media"><div class="ph"><div class="ph-inner"><div class="ph-icon">${icon}</div><div class="ph-label">${label}</div></div></div>${badge}</div>`;
+    }
+
+    function renderCard(item) {
+      const kind = cardKind(item);
+      const metaClass = kind === "missing" ? "missing" : "playable";
+      return `
+        <article class="card" data-kind="${kind}" data-url="${escapeHtml(item.url || "")}" data-title="${escapeHtml(item.title)}" tabindex="0" role="button">
+          ${mediaMarkup(item, kind)}
+          <h3 class="card-title">${escapeHtml(item.title)}</h3>
+          <p class="card-cat">${escapeHtml(item.category || "")}</p>
+          <p class="card-meta"><span class="${metaClass}">${actionLabel(kind)}</span></p>
+        </article>
+      `;
+    }
+
+    function render(data, activeId) {
+      $("intro").textContent = data.intro || "";
+      const notice = $("notice");
+      if (data.notice) {
+        notice.hidden = false;
+        notice.querySelector("span:last-child").textContent = data.notice;
+      }
+      $("stats").innerHTML = `
+        <div class="stat"><span>Videos</span><b>${escapeHtml(data.stats.videos)}</b></div>
+        <div class="stat"><span>Total runtime</span><b class="mono">${escapeHtml(data.stats.runtime)}</b></div>
+        <div class="stat"><span>Updated</span><b>${escapeHtml(data.updated)}</b></div>
+      `;
+      $("filters").innerHTML = (data.filters || []).map((filter) => `
+        <button class="filter${filter.id === activeId ? " active" : ""}" type="button" data-id="${escapeHtml(filter.id)}" role="tab" aria-selected="${filter.id === activeId}">
+          <span>${escapeHtml(filter.label)}</span>
+          <span class="count">${escapeHtml(filter.count)}</span>
+        </button>
+      `).join("");
+
+      $("sections").innerHTML = (data.sections || []).map((section) => {
+        const hidden = activeId !== "all" && section.id !== activeId;
+        return `
+          <section class="section${hidden ? " hidden" : ""}" data-id="${escapeHtml(section.id)}">
+            <div class="section-head">
+              <div>
+                <h2>${escapeHtml(section.heading)}</h2>
+                <p class="blurb">${escapeHtml(section.blurb || "")}</p>
+              </div>
+              <div class="count-label">${section.items.length} video${section.items.length === 1 ? "" : "s"}</div>
+            </div>
+            <div class="grid ${gridClass(section.id)}">
+              ${section.items.map(renderCard).join("")}
+            </div>
+          </section>
+        `;
+      }).join("");
+    }
+
+    function openVideo(title, url) {
+      const modal = $("modal");
+      const video = $("modal-video");
+      $("modal-title").textContent = title;
+      video.src = url;
+      modal.hidden = false;
+      modal.classList.add("open");
+      video.play().catch(() => {});
+    }
+
+    function closeModal() {
+      const modal = $("modal");
+      const video = $("modal-video");
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+      modal.classList.remove("open");
+      modal.hidden = true;
+    }
+
+    function activateCard(card) {
+      const kind = card.dataset.kind;
+      const url = card.dataset.url;
+      const title = card.dataset.title;
+      if (kind === "video") {
+        openVideo(title, url);
+        return;
+      }
+      if (kind === "player" || kind === "page") {
+        window.open(url, "_blank", "noopener");
+        return;
+      }
+      window.open(SOURCE_ARTIFACT, "_blank", "noopener");
+    }
+
+    function setFilter(data, id) {
+      const next = (data.filters || []).some((f) => f.id === id) ? id : "all";
+      render(data, next);
+      if (location.hash.replace("#", "") !== next) {
+        history.replaceState(null, "", "#" + next);
+      }
+    }
+
+    async function loadData() {
+      const res = await fetch(DATA_URL, { cache: "no-cache" });
+      if (!res.ok) throw new Error("Could not load " + DATA_URL);
+      return res.json();
+    }
+
+    loadData()
+      .then((data) => {
+        const start = (location.hash || "#all").replace("#", "") || "all";
+        setFilter(data, start);
+        $("filters").addEventListener("click", (event) => {
+          const btn = event.target.closest(".filter");
+          if (!btn) return;
+          setFilter(data, btn.dataset.id);
+        });
+        $("sections").addEventListener("click", (event) => {
+          const card = event.target.closest(".card");
+          if (!card) return;
+          activateCard(card);
+        });
+        $("sections").addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          const card = event.target.closest(".card");
+          if (!card) return;
+          event.preventDefault();
+          activateCard(card);
+        });
+        window.addEventListener("hashchange", () => {
+          setFilter(data, (location.hash || "#all").replace("#", "") || "all");
+        });
+      })
+      .catch((err) => {
+        const box = $("load-error");
+        box.hidden = false;
+        box.textContent = "Screening Room data failed to load. Open this page over GitHub Pages or a local server so data/screening-room.json can be fetched.";
+        console.error(err);
+      });
+
+    $("modal-close").addEventListener("click", closeModal);
+    $("modal").addEventListener("click", (event) => {
+      if (event.target.id === "modal") closeModal();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeModal();
+    });
+  </script>
+</body>
+</html>

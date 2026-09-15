@@ -1,0 +1,903 @@
+{
+  "title": "Infinite AI Screening Room",
+  "updated": "September 15, 2026",
+  "stats": {
+    "videos": 54,
+    "runtime": "01:44:48:00"
+  },
+  "intro": "Selected work from our AI studio: sales letters, creator-style ads, cinematic spots, animated ads and explainers. Start with the picks, then browse by format.",
+  "notice": "All videos here are drafts. Every one would get final edits before it's published.",
+  "filters": [
+    {
+      "id": "all",
+      "label": "All",
+      "count": 54
+    },
+    {
+      "id": "start-here",
+      "label": "Start here",
+      "count": 6
+    },
+    {
+      "id": "vsls",
+      "label": "VSLs",
+      "count": 10
+    },
+    {
+      "id": "creator-ugc",
+      "label": "Creator & UGC",
+      "count": 6
+    },
+    {
+      "id": "spots",
+      "label": "Spots",
+      "count": 27
+    },
+    {
+      "id": "explainers",
+      "label": "Explainers",
+      "count": 6
+    },
+    {
+      "id": "promos",
+      "label": "Promos",
+      "count": 4
+    },
+    {
+      "id": "landing-pages",
+      "label": "Landing pages",
+      "count": 1
+    }
+  ],
+  "sections": [
+    {
+      "id": "start-here",
+      "heading": "Start here",
+      "blurb": "Watch these first.",
+      "items": [
+        {
+          "title": "Made for The Assist: creator ad demo",
+          "duration": "0:30",
+          "poster": null,
+          "url": null,
+          "category": "Creator & UGC"
+        },
+        {
+          "title": "DIY solar exit kit VSL",
+          "duration": "3:04",
+          "poster": null,
+          "url": null,
+          "category": "VSLs"
+        },
+        {
+          "title": "Infinite Leads explainer",
+          "duration": "0:47",
+          "poster": null,
+          "url": "https://infinite-leads.netlify.app/explainer.mp4",
+          "category": "Explainers"
+        },
+        {
+          "title": "AI services ad",
+          "duration": "1:00",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Escaping the solar trap: the full story",
+          "duration": "9:01",
+          "poster": null,
+          "url": null,
+          "category": "Explainers"
+        },
+        {
+          "title": "Data Leaks Explainer",
+          "duration": "1:44",
+          "poster": null,
+          "url": null,
+          "category": "Explainers"
+        }
+      ]
+    },
+    {
+      "id": "vsls",
+      "heading": "Video sales letters",
+      "blurb": "Long-form, direct-response videos that walk a buyer from problem to offer.",
+      "items": [
+        {
+          "title": "DIY solar exit kit VSL",
+          "duration": "3:04",
+          "poster": null,
+          "url": null,
+          "category": "VSLs"
+        },
+        {
+          "title": "Escapar de la Trampa Solar",
+          "duration": "7:47",
+          "poster": null,
+          "url": null,
+          "category": "VSLs"
+        },
+        {
+          "title": "Escape de Contratos Solares",
+          "duration": "8:21",
+          "poster": null,
+          "url": null,
+          "category": "VSLs"
+        },
+        {
+          "title": "The Solar Trap - Follow the Liability",
+          "duration": "5:06",
+          "poster": null,
+          "url": null,
+          "category": "VSLs"
+        },
+        {
+          "title": "The Solar Power Trap",
+          "duration": "11:17",
+          "poster": null,
+          "url": null,
+          "category": "VSLs"
+        },
+        {
+          "title": "Escaping the Solar Trap (v3)",
+          "duration": "9:33",
+          "poster": null,
+          "url": null,
+          "category": "VSLs"
+        },
+        {
+          "title": "The Solar Debt Trap (v1)",
+          "duration": "8:19",
+          "poster": null,
+          "url": null,
+          "category": "VSLs"
+        },
+        {
+          "title": "Estrategia de Salida Solar",
+          "duration": "9:23",
+          "poster": null,
+          "url": null,
+          "category": "VSLs"
+        },
+        {
+          "title": "Hidden Solar Trap",
+          "duration": "8:00",
+          "poster": null,
+          "url": null,
+          "category": "VSLs"
+        },
+        {
+          "title": "The Anatomy of a Rigged System",
+          "duration": "5:04",
+          "poster": null,
+          "url": null,
+          "category": "VSLs"
+        }
+      ]
+    },
+    {
+      "id": "creator-ugc",
+      "heading": "Creator-style & AI presenters",
+      "blurb": "Talking to camera, selfie framing, native-feed energy.",
+      "items": [
+        {
+          "title": "Infinite AI books a new lead",
+          "duration": "0:30",
+          "poster": null,
+          "url": null,
+          "category": "Creator & UGC"
+        },
+        {
+          "title": "Infinite AI: the $300 lead problem",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Creator & UGC"
+        },
+        {
+          "title": "Free solar contract review ad",
+          "duration": "0:28",
+          "poster": null,
+          "url": null,
+          "category": "Creator & UGC"
+        },
+        {
+          "title": "Made for The Assist: creator ad demo",
+          "duration": "0:30",
+          "poster": null,
+          "url": null,
+          "category": "Creator & UGC"
+        },
+        {
+          "title": "3x more appointments in 90 days",
+          "duration": "0:12",
+          "poster": null,
+          "url": null,
+          "category": "Creator & UGC"
+        },
+        {
+          "title": "Nobody calls until Tuesday",
+          "duration": "0:13",
+          "poster": null,
+          "url": null,
+          "category": "Creator & UGC"
+        }
+      ]
+    },
+    {
+      "id": "spots",
+      "heading": "Cinematic spots",
+      "blurb": "Commercial-grade short films with native voiceover, 10 to 30 seconds.",
+      "items": [
+        {
+          "title": "Solar exit: stuck homeowners",
+          "duration": "0:10",
+          "poster": null,
+          "url": "https://share.gemini.google/wJEuREmdsxV0",
+          "category": "Spots"
+        },
+        {
+          "title": "AI services: leads in the trash",
+          "duration": "0:10",
+          "poster": null,
+          "url": "https://share.gemini.google/vgBif3vsHGCC",
+          "category": "Spots"
+        },
+        {
+          "title": "Solar exit: the hidden fees",
+          "duration": "0:10",
+          "poster": null,
+          "url": "https://share.gemini.google/TyFj21qkYl0m",
+          "category": "Spots"
+        },
+        {
+          "title": "Office skit, part 1",
+          "duration": "0:10",
+          "poster": null,
+          "url": "https://share.gemini.google/pjSI3rn73JVP",
+          "category": "Spots"
+        },
+        {
+          "title": "Office skit, part 2",
+          "duration": "0:10",
+          "poster": null,
+          "url": "https://share.gemini.google/sYluixFp0TaH",
+          "category": "Spots"
+        },
+        {
+          "title": "Office skit, part 3",
+          "duration": "0:10",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "You may have options",
+          "duration": "0:25",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "EverChill: dad cools off in an inflatable pool",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Everwell: dad's living-room kiddie pool fix",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "HVAC ad: comfort restored",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Solar contract review ad",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Personal injury: start with a conversation",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Fowler & Musk: \"Before the Paperwork\"",
+          "duration": "0:20",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "HVAC spot: \"Get your home back to comfortable\"",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Finding clarity after an accident",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "A closer look at her solar bill",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "HVAC technician arrives on a hot day",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Reviewing a solar contract at home",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "A quiet, restrained personal injury story",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "A lead's journey from click to close",
+          "duration": "0:15",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "AI services ad",
+          "duration": "1:00",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Thursday: the adjuster calls",
+          "duration": "0:20",
+          "poster": null,
+          "url": "https://share.gemini.google/PrdiTAlqZqggm",
+          "category": "Spots"
+        },
+        {
+          "title": "Solar homeowner compares two bills at the island",
+          "duration": "0:10",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Injury spot: roadside call after a crash",
+          "duration": "0:10",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Infinite Leads turns visitors into revenue",
+          "duration": "0:10",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Free website traffic audit",
+          "duration": "0:10",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        },
+        {
+          "title": "Infinite AI: \"The Future of Rev Ops\"",
+          "duration": "0:10",
+          "poster": null,
+          "url": null,
+          "category": "Spots"
+        }
+      ]
+    },
+    {
+      "id": "explainers",
+      "heading": "Explainers",
+      "blurb": "Narrated, data-driven and educational videos.",
+      "items": [
+        {
+          "title": "Data Leaks Explainer",
+          "duration": "1:44",
+          "poster": null,
+          "url": null,
+          "category": "Explainers"
+        },
+        {
+          "title": "Proving AI impact for a real client",
+          "duration": "1:53",
+          "poster": null,
+          "url": null,
+          "category": "Explainers"
+        },
+        {
+          "title": "Escaping the solar trap: the full story",
+          "duration": "9:01",
+          "poster": null,
+          "url": null,
+          "category": "Explainers"
+        },
+        {
+          "title": "Infinite Leads explainer",
+          "duration": "0:47",
+          "poster": null,
+          "url": "https://infinite-leads.netlify.app/explainer.mp4",
+          "category": "Explainers"
+        },
+        {
+          "title": "The FTC Holder Rule in one minute",
+          "duration": "1:20",
+          "poster": null,
+          "url": null,
+          "category": "Explainers"
+        },
+        {
+          "title": "The legal life raft for solar cases",
+          "duration": "3:48",
+          "poster": null,
+          "url": null,
+          "category": "Explainers"
+        }
+      ]
+    },
+    {
+      "id": "promos",
+      "heading": "Promos",
+      "blurb": "Company and product promos.",
+      "items": [
+        {
+          "title": "Meet your AI sales employee",
+          "duration": "0:28",
+          "poster": null,
+          "url": null,
+          "category": "Promos"
+        },
+        {
+          "title": "One team, one complete solution",
+          "duration": "0:30",
+          "poster": null,
+          "url": "https://share.gemini.google/009b0cS5Iupp",
+          "category": "Promos"
+        },
+        {
+          "title": "Solar takeover & restoration promo",
+          "duration": "0:10",
+          "poster": null,
+          "url": "https://share.gemini.google/DuidCUCbZIVp",
+          "category": "Promos"
+        },
+        {
+          "title": "Infinite Leads revenue funnel",
+          "duration": "0:10",
+          "poster": null,
+          "url": "https://share.gemini.google/8O9OQAxQcclP",
+          "category": "Promos"
+        }
+      ]
+    },
+    {
+      "id": "landing-pages",
+      "heading": "Landing pages",
+      "blurb": "Pages we design and ship alongside the videos.",
+      "items": [
+        {
+          "title": "Infinite Leads landing page",
+          "duration": null,
+          "poster": null,
+          "url": "https://infinite-leads.netlify.app/#calc",
+          "category": "Landing pages"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "title": "DIY solar exit kit VSL",
+      "duration": "3:04",
+      "poster": null,
+      "url": null,
+      "category": "VSLs"
+    },
+    {
+      "title": "Escapar de la Trampa Solar",
+      "duration": "7:47",
+      "poster": null,
+      "url": null,
+      "category": "VSLs"
+    },
+    {
+      "title": "Escape de Contratos Solares",
+      "duration": "8:21",
+      "poster": null,
+      "url": null,
+      "category": "VSLs"
+    },
+    {
+      "title": "The Solar Trap - Follow the Liability",
+      "duration": "5:06",
+      "poster": null,
+      "url": null,
+      "category": "VSLs"
+    },
+    {
+      "title": "The Solar Power Trap",
+      "duration": "11:17",
+      "poster": null,
+      "url": null,
+      "category": "VSLs"
+    },
+    {
+      "title": "Escaping the Solar Trap (v3)",
+      "duration": "9:33",
+      "poster": null,
+      "url": null,
+      "category": "VSLs"
+    },
+    {
+      "title": "The Solar Debt Trap (v1)",
+      "duration": "8:19",
+      "poster": null,
+      "url": null,
+      "category": "VSLs"
+    },
+    {
+      "title": "Estrategia de Salida Solar",
+      "duration": "9:23",
+      "poster": null,
+      "url": null,
+      "category": "VSLs"
+    },
+    {
+      "title": "Hidden Solar Trap",
+      "duration": "8:00",
+      "poster": null,
+      "url": null,
+      "category": "VSLs"
+    },
+    {
+      "title": "The Anatomy of a Rigged System",
+      "duration": "5:04",
+      "poster": null,
+      "url": null,
+      "category": "VSLs"
+    },
+    {
+      "title": "Infinite AI books a new lead",
+      "duration": "0:30",
+      "poster": null,
+      "url": null,
+      "category": "Creator & UGC"
+    },
+    {
+      "title": "Infinite AI: the $300 lead problem",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Creator & UGC"
+    },
+    {
+      "title": "Free solar contract review ad",
+      "duration": "0:28",
+      "poster": null,
+      "url": null,
+      "category": "Creator & UGC"
+    },
+    {
+      "title": "Made for The Assist: creator ad demo",
+      "duration": "0:30",
+      "poster": null,
+      "url": null,
+      "category": "Creator & UGC"
+    },
+    {
+      "title": "3x more appointments in 90 days",
+      "duration": "0:12",
+      "poster": null,
+      "url": null,
+      "category": "Creator & UGC"
+    },
+    {
+      "title": "Nobody calls until Tuesday",
+      "duration": "0:13",
+      "poster": null,
+      "url": null,
+      "category": "Creator & UGC"
+    },
+    {
+      "title": "Solar exit: stuck homeowners",
+      "duration": "0:10",
+      "poster": null,
+      "url": "https://share.gemini.google/wJEuREmdsxV0",
+      "category": "Spots"
+    },
+    {
+      "title": "AI services: leads in the trash",
+      "duration": "0:10",
+      "poster": null,
+      "url": "https://share.gemini.google/vgBif3vsHGCC",
+      "category": "Spots"
+    },
+    {
+      "title": "Solar exit: the hidden fees",
+      "duration": "0:10",
+      "poster": null,
+      "url": "https://share.gemini.google/TyFj21qkYl0m",
+      "category": "Spots"
+    },
+    {
+      "title": "Office skit, part 1",
+      "duration": "0:10",
+      "poster": null,
+      "url": "https://share.gemini.google/pjSI3rn73JVP",
+      "category": "Spots"
+    },
+    {
+      "title": "Office skit, part 2",
+      "duration": "0:10",
+      "poster": null,
+      "url": "https://share.gemini.google/sYluixFp0TaH",
+      "category": "Spots"
+    },
+    {
+      "title": "Office skit, part 3",
+      "duration": "0:10",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "You may have options",
+      "duration": "0:25",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "EverChill: dad cools off in an inflatable pool",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Everwell: dad's living-room kiddie pool fix",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "HVAC ad: comfort restored",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Solar contract review ad",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Personal injury: start with a conversation",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Fowler & Musk: \"Before the Paperwork\"",
+      "duration": "0:20",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "HVAC spot: \"Get your home back to comfortable\"",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Finding clarity after an accident",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "A closer look at her solar bill",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "HVAC technician arrives on a hot day",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Reviewing a solar contract at home",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "A quiet, restrained personal injury story",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "A lead's journey from click to close",
+      "duration": "0:15",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "AI services ad",
+      "duration": "1:00",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Thursday: the adjuster calls",
+      "duration": "0:20",
+      "poster": null,
+      "url": "https://share.gemini.google/PrdiTAlqZqggm",
+      "category": "Spots"
+    },
+    {
+      "title": "Solar homeowner compares two bills at the island",
+      "duration": "0:10",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Injury spot: roadside call after a crash",
+      "duration": "0:10",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Infinite Leads turns visitors into revenue",
+      "duration": "0:10",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Free website traffic audit",
+      "duration": "0:10",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Infinite AI: \"The Future of Rev Ops\"",
+      "duration": "0:10",
+      "poster": null,
+      "url": null,
+      "category": "Spots"
+    },
+    {
+      "title": "Data Leaks Explainer",
+      "duration": "1:44",
+      "poster": null,
+      "url": null,
+      "category": "Explainers"
+    },
+    {
+      "title": "Proving AI impact for a real client",
+      "duration": "1:53",
+      "poster": null,
+      "url": null,
+      "category": "Explainers"
+    },
+    {
+      "title": "Escaping the solar trap: the full story",
+      "duration": "9:01",
+      "poster": null,
+      "url": null,
+      "category": "Explainers"
+    },
+    {
+      "title": "Infinite Leads explainer",
+      "duration": "0:47",
+      "poster": null,
+      "url": "https://infinite-leads.netlify.app/explainer.mp4",
+      "category": "Explainers"
+    },
+    {
+      "title": "The FTC Holder Rule in one minute",
+      "duration": "1:20",
+      "poster": null,
+      "url": null,
+      "category": "Explainers"
+    },
+    {
+      "title": "The legal life raft for solar cases",
+      "duration": "3:48",
+      "poster": null,
+      "url": null,
+      "category": "Explainers"
+    },
+    {
+      "title": "Meet your AI sales employee",
+      "duration": "0:28",
+      "poster": null,
+      "url": null,
+      "category": "Promos"
+    },
+    {
+      "title": "One team, one complete solution",
+      "duration": "0:30",
+      "poster": null,
+      "url": "https://share.gemini.google/009b0cS5Iupp",
+      "category": "Promos"
+    },
+    {
+      "title": "Solar takeover & restoration promo",
+      "duration": "0:10",
+      "poster": null,
+      "url": "https://share.gemini.google/DuidCUCbZIVp",
+      "category": "Promos"
+    },
+    {
+      "title": "Infinite Leads revenue funnel",
+      "duration": "0:10",
+      "poster": null,
+      "url": "https://share.gemini.google/8O9OQAxQcclP",
+      "category": "Promos"
+    },
+    {
+      "title": "Infinite Leads landing page",
+      "duration": null,
+      "poster": null,
+      "url": "https://infinite-leads.netlify.app/#calc",
+      "category": "Landing pages"
+    }
+  ]
+}
