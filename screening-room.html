@@ -337,6 +337,9 @@
   }
   .card-meta .playable { color: var(--amber-deep); }
   .card-meta .missing { color: var(--orange); }
+  .card[data-kind="missing"] { cursor: pointer; }
+  .card[data-kind="missing"] .media { opacity: 0.72; }
+  .card[data-kind="missing"] .card-title { color: #3f3f3f; }
 
   .foot {
     margin-top: 64px;
@@ -367,8 +370,51 @@
     border-radius: 16px;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
   }
-  .modal-panel video { width: 100%; display: block; max-height: 80vh; background: #000; }
+  .modal-panel.is-page { width: min(1100px, 100%); height: min(86vh, 920px); }
+  .modal-stage { position: relative; background: #000; min-height: 180px; }
+  .modal-panel.is-page .modal-stage { flex: 1; min-height: 0; }
+  .modal-panel video {
+    width: 100%;
+    display: block;
+    max-height: 80vh;
+    background: #000;
+  }
+  .modal-panel iframe {
+    width: 100%;
+    height: min(72vh, 780px);
+    border: 0;
+    display: block;
+    background: #111;
+  }
+  .modal-panel.is-page iframe { height: 100%; }
+  .modal-unavailable {
+    display: grid;
+    place-items: center;
+    min-height: 280px;
+    padding: 36px 24px;
+    background:
+      radial-gradient(120% 80% at 50% 120%, rgba(227, 148, 28, 0.16), transparent 46%),
+      #111;
+    color: #f3f3f1;
+    text-align: center;
+  }
+  .modal-unavailable p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .modal-unavailable span {
+    display: block;
+    margin-top: 8px;
+    color: rgba(255,255,255,0.62);
+    font-size: 13px;
+    font-weight: 500;
+  }
   .modal-bar {
     display: flex;
     justify-content: space-between;
@@ -415,7 +461,6 @@
   }
   @media (max-width: 520px) {
     .grid.cols-3, .grid.cols-5, .grid.cols-1 { grid-template-columns: 1fr; }
-    .top-actions .ghost:last-child { display: none; }
     .brand-full { display: none; }
     .brand-short { display: inline; }
   }
@@ -430,7 +475,6 @@
     </div>
     <div class="top-actions">
       <a class="ghost" href="assist.html">← Assist board</a>
-      <a class="ghost" href="https://claude.ai/artifact/4rNG7y53XcsyFmKq176CCB" target="_blank" rel="noopener">Open source artifact</a>
     </div>
   </header>
 
@@ -449,23 +493,31 @@
     <footer class="foot">
       <a href="assist.html">← Back to The Assist board</a>
       <span>Draft workroom for Andy / Chase</span>
-      <a href="https://claude.ai/artifact/4rNG7y53XcsyFmKq176CCB" target="_blank" rel="noopener">Original Screening Room source</a>
     </footer>
   </main>
 
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Video player" hidden>
-    <div class="modal-panel">
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-panel" id="modal-panel">
       <div class="modal-bar">
         <strong id="modal-title"></strong>
         <button class="modal-close" type="button" id="modal-close" aria-label="Close">×</button>
       </div>
-      <video id="modal-video" controls playsinline></video>
+      <div class="modal-stage" id="modal-stage">
+        <video id="modal-video" controls playsinline autoplay hidden></video>
+        <iframe id="modal-frame" hidden title="Embedded media" allow="autoplay; fullscreen; clipboard-read; clipboard-write" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="modal-unavailable" id="modal-unavailable" hidden>
+          <div>
+            <p>Media not hosted yet</p>
+            <span>This clip stays on the Screening Room. Nothing opens off-site.</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    const SOURCE_ARTIFACT = "https://claude.ai/artifact/4rNG7y53XcsyFmKq176CCB";
     const DATA_URL = "data/screening-room.json";
+    const LANDING_HOSTS = new Set(["infinite-leads.netlify.app"]);
 
     const ICONS = {
       play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
@@ -483,25 +535,54 @@
         .replace(/"/g, "&quot;");
     }
 
-    function isDirectVideo(url) {
-      return typeof url === "string" && /\.(mp4|webm|ogg|mov)(\?|#|$)/i.test(url);
+    function isHttp(url) {
+      return typeof url === "string" && /^https?:\/\//i.test(url);
     }
 
-    function isExternalPage(url) {
-      return typeof url === "string" && /^https?:\/\//i.test(url) && !isDirectVideo(url);
+    function isVideoMime(mime) {
+      return typeof mime === "string" && /^video\//i.test(mime.trim());
+    }
+
+    function isDirectVideo(url, mime) {
+      if (isVideoMime(mime)) return isHttp(url);
+      return typeof url === "string" && /\.(mp4|m4v|webm|ogg|ogv|mov)(\?|#|$)/i.test(url);
+    }
+
+    function isImageUrl(url) {
+      return typeof url === "string" && /\.(jpe?g|png|gif|webp|avif)(\?|#|$)/i.test(url);
+    }
+
+    function hostnameOf(url) {
+      try { return new URL(url).hostname; } catch { return ""; }
+    }
+
+    function isLandingPage(item) {
+      if (!isHttp(item.url) || isDirectVideo(item.url, item.mime || item.type)) return false;
+      if (item.category === "Landing pages") return true;
+      return LANDING_HOSTS.has(hostnameOf(item.url));
+    }
+
+    function playback(item) {
+      const url = item.url || "";
+      const mime = item.mime || item.type || "";
+      if (isDirectVideo(url, mime)) return { mode: "video", src: url };
+      if (isHttp(item.embedUrl)) return { mode: "embed", src: item.embedUrl };
+      if (isLandingPage(item)) return { mode: "page", src: url };
+      return { mode: "unavailable", src: "" };
     }
 
     function cardKind(item) {
-      if (isDirectVideo(item.url)) return "video";
-      if (isExternalPage(item.url)) return item.category === "Landing pages" ? "page" : "player";
+      const mode = playback(item).mode;
+      if (mode === "video") return "video";
+      if (mode === "embed") return "embed";
+      if (mode === "page") return "page";
       return "missing";
     }
 
     function actionLabel(kind) {
-      if (kind === "video") return "Play";
-      if (kind === "player") return "Open player";
-      if (kind === "page") return "Open page";
-      return "Open in Screening Room source";
+      if (kind === "video" || kind === "embed") return "Play";
+      if (kind === "page") return "Preview page";
+      return "Media not hosted yet";
     }
 
     function gridClass(sectionId) {
@@ -514,19 +595,21 @@
       const badge = item.duration
         ? `<span class="badge">${escapeHtml(item.duration)}</span>`
         : "";
-      if (isDirectVideo(item.url)) {
-        return `<div class="media"><video muted preload="metadata" playsinline src="${escapeHtml(item.url)}"></video>${badge}</div>`;
+      if (kind === "video" && isDirectVideo(item.url, item.mime || item.type)) {
+        const poster = isImageUrl(item.poster) ? ` poster="${escapeHtml(item.poster)}"` : "";
+        return `<div class="media"><video muted preload="metadata" playsinline src="${escapeHtml(item.url)}"${poster}></video>${badge}</div>`;
       }
-      const icon = kind === "missing" ? ICONS.source : kind === "page" ? ICONS.link : ICONS.play;
-      const label = kind === "missing" ? "No file yet" : kind === "page" ? "Landing page" : "External clip";
+      const icon = kind === "page" ? ICONS.link : kind === "embed" ? ICONS.play : ICONS.source;
+      const label = kind === "page" ? "Landing page" : kind === "embed" ? "Embedded clip" : "Media not hosted yet";
       return `<div class="media"><div class="ph"><div class="ph-inner"><div class="ph-icon">${icon}</div><div class="ph-label">${label}</div></div></div>${badge}</div>`;
     }
 
     function renderCard(item) {
       const kind = cardKind(item);
+      const play = playback(item);
       const metaClass = kind === "missing" ? "missing" : "playable";
       return `
-        <article class="card" data-kind="${kind}" data-url="${escapeHtml(item.url || "")}" data-title="${escapeHtml(item.title)}" tabindex="0" role="button">
+        <article class="card" data-kind="${kind}" data-mode="${play.mode}" data-src="${escapeHtml(play.src)}" data-title="${escapeHtml(item.title)}" tabindex="0" role="button">
           ${mediaMarkup(item, kind)}
           <h3 class="card-title">${escapeHtml(item.title)}</h3>
           <p class="card-cat">${escapeHtml(item.category || "")}</p>
@@ -575,39 +658,58 @@
       }).join("");
     }
 
-    function openVideo(title, url) {
+    function hidePlayerSurfaces() {
+      const video = $("modal-video");
+      const frame = $("modal-frame");
+      const unavailable = $("modal-unavailable");
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+      video.hidden = true;
+      frame.hidden = true;
+      frame.removeAttribute("src");
+      unavailable.hidden = true;
+      $("modal-panel").classList.remove("is-page");
+    }
+
+    function openModal(card) {
       const modal = $("modal");
       const video = $("modal-video");
-      $("modal-title").textContent = title;
-      video.src = url;
+      const frame = $("modal-frame");
+      const unavailable = $("modal-unavailable");
+      const mode = card.dataset.mode;
+      const src = card.dataset.src || "";
+      hidePlayerSurfaces();
+      $("modal-title").textContent = card.dataset.title || "";
+      if (mode === "video" && src) {
+        video.hidden = false;
+        video.setAttribute("autoplay", "");
+        video.src = src;
+        video.play().catch(() => {});
+      } else if ((mode === "embed" || mode === "page") && src) {
+        if (mode === "page") $("modal-panel").classList.add("is-page");
+        frame.hidden = false;
+        frame.title = card.dataset.title || "Embedded media";
+        frame.src = src;
+      } else {
+        unavailable.hidden = false;
+      }
       modal.hidden = false;
       modal.classList.add("open");
-      video.play().catch(() => {});
+      document.body.style.overflow = "hidden";
+      $("modal-close").focus();
     }
 
     function closeModal() {
       const modal = $("modal");
-      const video = $("modal-video");
-      video.pause();
-      video.removeAttribute("src");
-      video.load();
+      hidePlayerSurfaces();
       modal.classList.remove("open");
       modal.hidden = true;
+      document.body.style.overflow = "";
     }
 
     function activateCard(card) {
-      const kind = card.dataset.kind;
-      const url = card.dataset.url;
-      const title = card.dataset.title;
-      if (kind === "video") {
-        openVideo(title, url);
-        return;
-      }
-      if (kind === "player" || kind === "page") {
-        window.open(url, "_blank", "noopener");
-        return;
-      }
-      window.open(SOURCE_ARTIFACT, "_blank", "noopener");
+      openModal(card);
     }
 
     function setFilter(data, id) {
@@ -636,6 +738,7 @@
         $("sections").addEventListener("click", (event) => {
           const card = event.target.closest(".card");
           if (!card) return;
+          event.preventDefault();
           activateCard(card);
         });
         $("sections").addEventListener("keydown", (event) => {
