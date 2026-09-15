@@ -60,6 +60,7 @@
     letter-spacing: -0.01em;
     white-space: nowrap;
   }
+  .brand-short { display: none; }
   .brand-note {
     color: var(--muted);
     font-size: 13px;
@@ -102,8 +103,8 @@
   }
   h1.hero {
     font-family: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
-    font-size: clamp(72px, 14vw, 148px);
-    line-height: 0.82;
+    font-size: clamp(64px, 16vw, 176px);
+    line-height: 0.8;
     letter-spacing: 0.01em;
     margin: 18px 0 22px;
     font-weight: 400;
@@ -415,13 +416,15 @@
   @media (max-width: 520px) {
     .grid.cols-3, .grid.cols-5, .grid.cols-1 { grid-template-columns: 1fr; }
     .top-actions .ghost:last-child { display: none; }
+    .brand-full { display: none; }
+    .brand-short { display: inline; }
   }
 </style>
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
-      <span class="brand-name">Infinite AI Screening Room</span>
+      <span class="brand-name"><span class="brand-full">Infinite AI Screening Room</span><span class="brand-short">Screening Room</span></span>
       <span class="brand-dot">·</span>
       <span class="brand-note">Content is user-generated and unverified.</span>
     </div>
@@ -533,7 +536,7 @@
     }
 
     function render(data, activeId) {
-      $("intro").textContent = data.intro || "";
+      $("intro").textContent = (data.intro || "") + (data.intro && !/tap any card/i.test(data.intro) ? " Tap any card to play." : "");
       const notice = $("notice");
       if (data.notice) {
         notice.hidden = false;
@@ -560,7 +563,9 @@
                 <h2>${escapeHtml(section.heading)}</h2>
                 <p class="blurb">${escapeHtml(section.blurb || "")}</p>
               </div>
-              <div class="count-label">${section.items.length} video${section.items.length === 1 ? "" : "s"}</div>
+              <div class="count-label">${section.id === "landing-pages"
+                ? `${section.items.length} page${section.items.length === 1 ? "" : "s"}`
+                : `${section.items.length} video${section.items.length === 1 ? "" : "s"}`}</div>
             </div>
             <div class="grid ${gridClass(section.id)}">
               ${section.items.map(renderCard).join("")}
