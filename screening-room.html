@@ -372,25 +372,32 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    max-height: 90vh;
+    max-height: calc(100vh - 48px);
   }
-  .modal-panel.is-page { width: min(1100px, 100%); height: min(86vh, 920px); }
-  .modal-stage { position: relative; background: #000; min-height: 180px; }
-  .modal-panel.is-page .modal-stage { flex: 1; min-height: 0; }
+  .modal-panel.is-page {
+    width: min(1100px, 100%);
+    height: min(86vh, calc(100vh - 48px));
+  }
+  .modal-stage {
+    position: relative;
+    background: #000;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
   .modal-panel video {
     width: 100%;
     display: block;
-    max-height: 80vh;
+    max-height: calc(100vh - 140px);
     background: #000;
   }
   .modal-panel iframe {
     width: 100%;
-    height: min(72vh, 780px);
+    height: 100%;
     border: 0;
     display: block;
     background: #111;
   }
-  .modal-panel.is-page iframe { height: 100%; }
   .modal-unavailable {
     display: grid;
     place-items: center;
@@ -423,6 +430,7 @@
     padding: 12px 14px;
     background: #111;
     color: #fff;
+    flex-shrink: 0;
   }
   .modal-bar strong { font-size: 14px; }
   .modal-close {
@@ -502,16 +510,7 @@
         <strong id="modal-title"></strong>
         <button class="modal-close" type="button" id="modal-close" aria-label="Close">×</button>
       </div>
-      <div class="modal-stage" id="modal-stage">
-        <video id="modal-video" controls playsinline autoplay hidden></video>
-        <iframe id="modal-frame" hidden title="Embedded media" allow="autoplay; fullscreen; clipboard-read; clipboard-write" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <div class="modal-unavailable" id="modal-unavailable" hidden>
-          <div>
-            <p>Media not hosted yet</p>
-            <span>This clip stays on the Screening Room. Nothing opens off-site.</span>
-          </div>
-        </div>
-      </div>
+      <div class="modal-stage" id="modal-stage"></div>
     </div>
   </div>
 
@@ -658,41 +657,36 @@
       }).join("");
     }
 
-    function hidePlayerSurfaces() {
+    function clearStage() {
       const video = $("modal-video");
+      if (video) {
+        video.pause();
+        video.removeAttribute("src");
+        video.load();
+      }
       const frame = $("modal-frame");
-      const unavailable = $("modal-unavailable");
-      video.pause();
-      video.removeAttribute("src");
-      video.load();
-      video.hidden = true;
-      frame.hidden = true;
-      frame.removeAttribute("src");
-      unavailable.hidden = true;
+      if (frame) frame.removeAttribute("src");
+      $("modal-stage").innerHTML = "";
       $("modal-panel").classList.remove("is-page");
     }
 
     function openModal(card) {
       const modal = $("modal");
-      const video = $("modal-video");
-      const frame = $("modal-frame");
-      const unavailable = $("modal-unavailable");
+      const stage = $("modal-stage");
       const mode = card.dataset.mode;
       const src = card.dataset.src || "";
-      hidePlayerSurfaces();
-      $("modal-title").textContent = card.dataset.title || "";
+      const title = card.dataset.title || "";
+      clearStage();
+      $("modal-title").textContent = title;
       if (mode === "video" && src) {
-        video.hidden = false;
-        video.setAttribute("autoplay", "");
-        video.src = src;
+        stage.innerHTML = `<video id="modal-video" controls playsinline autoplay src="${escapeHtml(src)}"></video>`;
+        const video = $("modal-video");
         video.play().catch(() => {});
       } else if ((mode === "embed" || mode === "page") && src) {
         if (mode === "page") $("modal-panel").classList.add("is-page");
-        frame.hidden = false;
-        frame.title = card.dataset.title || "Embedded media";
-        frame.src = src;
+        stage.innerHTML = `<iframe id="modal-frame" title="${escapeHtml(title || "Embedded media")}" src="${escapeHtml(src)}" allow="autoplay; fullscreen; clipboard-read; clipboard-write" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
       } else {
-        unavailable.hidden = false;
+        stage.innerHTML = `<div class="modal-unavailable" id="modal-unavailable"><div><p>Media not hosted yet</p><span>This clip stays on the Screening Room. Nothing opens off-site.</span></div></div>`;
       }
       modal.hidden = false;
       modal.classList.add("open");
@@ -702,7 +696,7 @@
 
     function closeModal() {
       const modal = $("modal");
-      hidePlayerSurfaces();
+      clearStage();
       modal.classList.remove("open");
       modal.hidden = true;
       document.body.style.overflow = "";
